@@ -107,83 +107,95 @@ function App() {
     };
 
     return (
-        <main className="relative min-h-screen bg-gradient-to-l from-[#FFA18F] via-[#B14EFF] to-[#3BADFF]">
+        <main className="relative min-h-screen">
             <Toaster position="top-right" />
-            <div className="max-w-5xl mx-auto pt-10">
-                <header className="flex justify-center py-4 rounded-2xl bg-white/30 backdrop-blur-sm">
-                    <div className="flex flex-col items-center justify-center">
-                        <img src="/logo.svg" alt="logo" className="max-w-40" />
-                        <h1 className="font-semibold text-4xl text-white pt-4">
-                            OG AVATAR BUILDER
-                        </h1>
-                        <p className="pt-4 text-sm text-white/80">
-                            by{" "}
-                            <a
-                                href="https://x.com/prmakk"
-                                className="underline"
-                            >
-                                prmakk
-                            </a>
-                        </p>
-                    </div>
-                </header>
+            <div className="absolute inset-0 bg-[url('/env.webp')] bg-cover bg-center z-0" />
 
-                <div className="max-w-full flex justify-center items-center mt-10">
-                    <div>
-                        <input
-                            className="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-100"
-                            aria-describedby="file_input_help"
-                            id="file_input"
-                            type="file"
-                            accept="image/*"
-                            onChange={handleAddImage}
-                        />
+            <div
+                className={`relative z-10 ${
+                    isImageAdded ? "backdrop-blur-sm" : ""
+                } min-h-screen`}
+            >
+                <div className="max-w-2xl mx-auto pt-10">
+                    <header className="flex justify-center py-4 rounded-2xl bg-irys-black backdrop-blur-sm">
+                        <div className="flex flex-col items-center justify-center">
+                            <img
+                                src="/logo_white.webp"
+                                alt="logo"
+                                className="max-w-80"
+                            />
+                            <h1 className="font-bold text-4xl text-irys-main pt-4">
+                                AVATAR BUILDER
+                            </h1>
+                            <p className="text-sm text-white/80">
+                                by{" "}
+                                <a
+                                    href="https://x.com/prmakk"
+                                    className="underline"
+                                >
+                                    prmakk
+                                </a>
+                            </p>
+                        </div>
+                    </header>
+
+                    <div className="max-w-full flex justify-center items-center mt-10">
+                        <div>
+                            <input
+                                className="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-100"
+                                aria-describedby="file_input_help"
+                                id="file_input"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleAddImage}
+                            />
+                        </div>
                     </div>
+
+                    {isImageAdded && (
+                        <div className="lg:flex-row lg:items-start p-10 flex flex-col justify-between gap-6 items-center">
+                            <div className="flex flex-col flex-1/2 gap-4 justify-center items-center">
+                                <canvas
+                                    ref={canvasRef}
+                                    className="border-dashed border-1 border-amber-50 rounded-2xl"
+                                />
+
+                                <div className="flex justify-around w-full">
+                                    <button
+                                        onClick={() =>
+                                            saveCanvasAsImage(
+                                                canvas!,
+                                                "irys_avatar_by_prmak.png"
+                                            )
+                                        }
+                                        className="flex gap-1 items-center bg-irys-main px-6 py-2 rounded-lg border-3 border-irys-main hover:border-3 hover:border-irys-black cursor-pointer transition-all"
+                                    >
+                                        Download
+                                        <Download size={20} />
+                                    </button>
+                                    <button
+                                        onClick={handleClearCanvas}
+                                        className="flex gap-1 items-center bg-irys-main px-6 py-2 rounded-lg border-3 border-irys-main hover:border-3 hover:border-irys-black cursor-pointer transition-all"
+                                    >
+                                        Clear
+                                        <Eraser size={20} />
+                                    </button>
+                                </div>
+                            </div>
+
+                            <Assets addAsset={addAsset} />
+                        </div>
+                    )}
                 </div>
 
-                {isImageAdded && (
-                    <div className="lg:flex-row lg:items-start p-10 flex flex-col justify-between gap-6 items-center">
-                        <div className="flex flex-col flex-1/2 gap-4 justify-center items-center">
-                            <canvas
-                                ref={canvasRef}
-                                className="border-dashed border-1 border-amber-50 rounded-2xl"
-                            />
-
-                            <div className="flex justify-around w-full">
-                                <button
-                                    onClick={() =>
-                                        saveCanvasAsImage(
-                                            canvas!,
-                                            "0g_avatar_by_prmak.png"
-                                        )
-                                    }
-                                    className="flex gap-1 items-center bg-white px-6 py-2 rounded-2xl hover:bg-purple hover:text-white cursor-pointer transition-all"
-                                >
-                                    Download
-                                    <Download size={20} />
-                                </button>
-                                <button
-                                    onClick={handleClearCanvas}
-                                    className="flex gap-1 items-center bg-white px-6 py-2 rounded-2xl hover:bg-purple hover:text-white cursor-pointer transition-all"
-                                >
-                                    Clear
-                                    <Eraser size={20} />
-                                </button>
-                            </div>
-                        </div>
-
-                        <Assets addAsset={addAsset} />
-                    </div>
-                )}
-            </div>
-
-            <div className="absolute bottom-5 right-5">
-                <a href="https://x.com/prmakk" target="_blank">
-                    <TwitterIcon
-                        className="text-slate-700 hover:text-purple transition-all hover:scale-110"
-                        size={35}
-                    />
-                </a>
+                <div className="absolute bottom-5 right-5">
+                    <a href="https://x.com/prmakk" target="_blank">
+                        <TwitterIcon
+                            className="text-slate-700 hover:text-purple transition-all hover:scale-110"
+                            size={35}
+                        />
+                    </a>
+                </div>
             </div>
         </main>
     );
