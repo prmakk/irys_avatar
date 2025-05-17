@@ -193,7 +193,7 @@ function App() {
                 <div className="absolute bottom-5 right-5">
                     <a href="https://x.com/prmakk" target="_blank">
                         <TwitterIcon
-                            className="text-slate-700 hover:text-purple transition-all hover:scale-110"
+                            className="text-slate-700 hover:text-irys-main transition-all hover:scale-110"
                             size={35}
                         />
                     </a>
