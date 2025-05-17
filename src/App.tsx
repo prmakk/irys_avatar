@@ -151,9 +151,11 @@ function App() {
                             />
                         </div>
                     </div>
+                </div>
 
-                    {isImageAdded && (
-                        <div className="lg:flex-row lg:items-start p-10 flex flex-col justify-between gap-6 items-center">
+                {isImageAdded && (
+                    <div className="flex justify-center">
+                        <div className="max-w-5xl lg:flex-row lg:items-start p-10 flex flex-col justify-between gap-6 items-center">
                             <div className="flex flex-col flex-1/2 gap-4 justify-center items-center">
                                 <canvas
                                     ref={canvasRef}
@@ -185,8 +187,8 @@ function App() {
 
                             <Assets addAsset={addAsset} />
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
 
                 <div className="absolute bottom-5 right-5">
                     <a href="https://x.com/prmakk" target="_blank">
