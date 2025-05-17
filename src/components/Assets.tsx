@@ -79,7 +79,7 @@ const Assets: FC<IProps> = ({ addAsset }) => {
                 <span className="text-irys-main">Irys</span> assets
             </h2>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 justify-center">
                 {ASSETS.map((asset) => (
                     <button
                         key={asset.id}
